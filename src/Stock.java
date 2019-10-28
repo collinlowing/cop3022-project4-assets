@@ -5,12 +5,6 @@ public class Stock extends Asset
 	private double oneYearReturn;
 	private double ninetyDayReturn;
 	
-	private double fiveYearReturnRate;
-	private double oneYearReturnRate;
-	private double ninetyDayReturnRate;
-	
-	private int expectedReturn;
-	
 	public Stock()
 	{
 		this("PKL", "Pickle, inc", 0, 0, 0);
@@ -20,9 +14,9 @@ public class Stock extends Asset
 	{
 		super(symbol, name);
 		
-		this.fiveYearReturnRate = fiveYearReturn;
-		this.oneYearReturnRate = oneYearReturn;
-		this.ninetyDayReturnRate = ninetyDayReturn;
+		this.fiveYearReturn = fiveYearReturn;
+		this.oneYearReturn = oneYearReturn;
+		this.ninetyDayReturn = ninetyDayReturn;
 	}
 	
 	private double calcCompoundingInterest(double returnRate, double years)
@@ -31,21 +25,18 @@ public class Stock extends Asset
 	}
 	
 	@Override
-	public void calcExpectedReturn()
+	public int calcExpectedReturn()
 	{
 		if(this.fiveYearReturn != 0 && this.oneYearReturn != 0 && this.ninetyDayReturn != 0)
 		{
-			this.expectedReturn = (int) (calcCompoundingInterest(this.fiveYearReturn, 5) * 0.6 + calcCompoundingInterest(this.oneYearReturn, 1) * 0.2 + calcCompoundingInterest(this.ninetyDayReturn, 0.25) * 0.2);
+			return (int) (calcCompoundingInterest(this.fiveYearReturn, 5) * 0.6 + calcCompoundingInterest(this.oneYearReturn, 1) * 0.2 + calcCompoundingInterest(this.ninetyDayReturn, 0.25) * 0.2);
 		}
 		
 		else if(this.oneYearReturn != 0 && this.ninetyDayReturn != 0)
 		{
-			this.expectedReturn = (int) (calcCompoundingInterest(this.oneYearReturn, 1) * 0.6 + calcCompoundingInterest(this.ninetyDayReturn, 0.25) * 0.4);
-		} 
-	}
-	
-	public String toString()
-	{
-		return "";
+			return (int) (calcCompoundingInterest(this.oneYearReturn, 1) * 0.6 + calcCompoundingInterest(this.ninetyDayReturn, 0.25) * 0.4);
+		}
+		return (int) super.getInvestment();
+		
 	}
 }

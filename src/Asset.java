@@ -3,7 +3,7 @@ public abstract class Asset
 {
 	private String symbol;
 	private String name;
-	private double investmentAmount;
+	private int investmentAmount;
 
 	public Asset(String symbol, String name) 
 	{
@@ -12,20 +12,25 @@ public abstract class Asset
 		this.investmentAmount = 0;
 	}
 	
-	public void setInvestment(double amount)
+	public String getSymbol()
 	{
-		this.investmentAmount = amount;
+		return this.symbol;
 	}
 	
-	public double getInvestment()
+	public void setInvestment(int amount)
+	{
+		this.investmentAmount += amount;
+	}
+	
+	public int getInvestment()
 	{
 		return this.investmentAmount;
 	}
 	
-	public abstract void calcExpectedReturn();
+	public abstract int calcExpectedReturn();
 	
 	public String toString()
 	{
-		return "";
+		return "\t" + this.name + "(" + this.symbol + ")";
 	}
 }

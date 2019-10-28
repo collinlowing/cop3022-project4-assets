@@ -2,7 +2,6 @@
 public class StableAsset extends Asset
 {
 	private double yearlyReturn;
-	private int expectedReturn;
 	
 	public StableAsset(String symbol, String name, double yearlyReturn)
 	{
@@ -11,13 +10,8 @@ public class StableAsset extends Asset
 	}
 	
 	@Override
-	public void calcExpectedReturn()
+	public int calcExpectedReturn()
 	{
-		expectedReturn = (int) (super.getInvestment() * Math.pow(this.yearlyReturn, 10));
-	}
-	
-	public String toString()
-	{
-		return "";
+		return (int) (super.getInvestment() * Math.pow(this.yearlyReturn, 10));
 	}
 }
